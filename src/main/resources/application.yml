@@ -2,12 +2,19 @@ logging:
   level:
     "[com.doding]": info # com.doding 하위 패키지는 기본이 debug
   pattern:
-    console: "%clr(%d{HH:mm:ss} [%-5level] %c{36}.%M.%L - %m%n)"
+    console: "%clr(%d{HH:mm:ss} [%-5level] %c{20}.%M.%L - %m%n)"
 
 spring:
   output:
     ansi:
       enabled: ALWAYS
+
+  task:
+    execution:
+      pool:
+        core-size: 8
+        max-size: 16
+
 ---
 spring:
   config:
