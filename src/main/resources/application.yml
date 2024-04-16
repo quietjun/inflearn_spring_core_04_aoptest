@@ -9,12 +9,6 @@ spring:
     ansi:
       enabled: ALWAYS
 
-  task:
-    execution:
-      pool:
-        core-size: 8
-        max-size: 16
-
 ---
 spring:
   config:
