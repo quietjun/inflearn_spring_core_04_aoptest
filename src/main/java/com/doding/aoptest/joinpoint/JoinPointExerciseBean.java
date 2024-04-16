@@ -16,13 +16,13 @@ public class JoinPointExerciseBean {
 
   public int getGugu(int a, int b) {
     /*
+    log.debug("전달 파라미터: a: {}, b: {}", a, b);    
     if (a < 1 || a > 9 || b < 1 || b > 9) {
       throw new RuntimeException("구구단은 1~9까지의 수를 곱한다.");
     }
     */
     int result = a * b;
     /*
-    log.debug("전달 파라미터: a: {}, b: {}", a, b);
     log.debug("동작 결과: {}", result);
     */
     return result;

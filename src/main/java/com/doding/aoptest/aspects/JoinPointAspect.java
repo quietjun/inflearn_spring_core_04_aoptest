@@ -14,6 +14,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StopWatch;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -95,14 +96,15 @@ public class JoinPointAspect {
 
   @Around("execution(java.math.BigInteger *..JoinPointExerciseBean.getFactorial(int))")
   public BigInteger handleFactorial(ProceedingJoinPoint pjp) throws Throwable {
-    long start = System.nanoTime();
+    StopWatch watch = new StopWatch();
+    watch.start();
     Object[] args = pjp.getArgs();
     BigInteger result = factorialCache.get(args[0]); // 전처리: 이미 구해놓은 factorial 확인
     if (result == null) {
       result = (BigInteger) pjp.proceed(args); // 타겟의 메서드 호출
       factorialCache.put(args[0], result); // 후처리: hash update
     }
-    log.debug("소요 시간: {}, 결과: {}", System.nanoTime() - start, result);
+    log.debug("소요 시간: {}, 결과: {}", watch.getTotalTimeMillis(), result);
     return result;
   }
   // @@END:
