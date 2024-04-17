@@ -2,6 +2,7 @@ package com.doding.aoptest.pointcut;
 
 import java.util.Calendar;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,6 +21,7 @@ public class PointcutTest {
   SimpleBean sBean;
 
   @Test
+  @DisplayName("다양한 메서드 호출과 연결되는 Pointcut 확인")
   public void methodCallTest() throws Exception {
     pBean.setOper("*");
     pBean.getOper();

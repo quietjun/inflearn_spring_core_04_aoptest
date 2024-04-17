@@ -20,12 +20,6 @@ public class SimpleBeanTest {
   SimpleBean sbean;
 
   @Test
-  public void testBean() {
-    assertNotNull(sbean);
-    log.debug("sbean type: {}", sbean.getClass().getName());
-  }
-
-  @Test
   public void testSetName() {
     String newName = "홍길동" + Math.random();
     sbean.setName(newName);
@@ -37,5 +31,14 @@ public class SimpleBeanTest {
     Calendar newNow = Calendar.getInstance();
     sbean.setNow(newNow);
     assertEquals(sbean.getNow(), newNow); // sBean의 now는 newNow와 같다.
+  }
+
+  @Test
+  public void testBean() {
+    // @@TODOBLOCK: 01. sbean의 타입을 검증하고 출력해보세요.
+    // assertEquals(sbean.getClass(), SimpleBeanImpl.class);
+    log.debug("sbean type: {}", sbean.getClass().getName());
+
+    // @@END:
   }
 }

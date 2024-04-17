@@ -2,13 +2,12 @@ package com.doding.aoptest.simple;
 
 import java.util.Calendar;
 
-import org.springframework.stereotype.Component;
+public interface SimpleBean {
+  public void setName(String name);
 
-import lombok.Data;
+  public String getName();
 
-@Data
-@Component
-public class SimpleBean {
-  private String name = "orgName";
-  private Calendar now = Calendar.getInstance();
+  public void setNow(Calendar now);
+
+  public Calendar getNow();
 }

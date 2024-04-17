@@ -1,5 +1,8 @@
 package com.doding.aoptest.aspects;
 
+// @@TODOBLOCK: 03. sbean의 setter가 호출될 때 해당 메서드의 정보를 출력하는 Aspect를 만들어보세요.
+// @@COMMENT: Aspect를 작성 후 앞서 작성했던 테스트를 실행하고 결과를 확인하세요.
+// @@REPLACE: public class PropMonitorAspect{}
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -12,10 +15,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class PropMonitorAspect {
 
-  // @@TODOBLOCK: execution(void com.doding..*.set*(*)) 을 pointcut으로 메서드 시작 전 동작하는 advice를 작성하세요.
-  @Before("execution(void com.doding..*.set*(*))")
+  // @Before("execution(void com.doding..*.set*(*))")
   public void beanPropertyWillChange(JoinPoint jp) {
     log.debug("AOP 동작: {}", jp.getSignature());
   }
-  // @@END:
 }
+// @@END:
