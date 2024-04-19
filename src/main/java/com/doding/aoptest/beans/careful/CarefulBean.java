@@ -1,4 +1,4 @@
-package com.doding.aoptest.careful;
+package com.doding.aoptest.beans.careful;
 
 import org.springframework.stereotype.Component;
 

@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import com.doding.aoptest.simple.SimpleBean;
+import com.doding.aoptest.beans.pointcut.PointcutBean;
+import com.doding.aoptest.beans.simple.SimpleBean;
 
 @SpringBootTest
 @ActiveProfiles("test")

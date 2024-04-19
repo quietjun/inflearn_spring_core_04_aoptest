@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import com.doding.aoptest.beans.joinpoint.JoinPointBean;
+import com.doding.aoptest.beans.joinpoint.JoinPointExerciseBean;
+
 import lombok.extern.slf4j.Slf4j;
 
 @SpringBootTest

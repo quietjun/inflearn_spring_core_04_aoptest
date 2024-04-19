@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.doding.aoptest.aspects.CarefulAspect;
+import com.doding.aoptest.beans.careful.CarefulBean;
 
 @SpringBootTest
 @ActiveProfiles("test")

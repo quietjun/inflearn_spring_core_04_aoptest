@@ -1,4 +1,4 @@
-package com.doding.aoptest.pointcut;
+package com.doding.aoptest.beans.pointcut;
 
 import org.springframework.stereotype.Component;
 

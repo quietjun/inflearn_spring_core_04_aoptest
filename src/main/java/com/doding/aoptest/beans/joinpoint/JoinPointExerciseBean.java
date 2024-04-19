@@ -1,4 +1,4 @@
-package com.doding.aoptest.joinpoint;
+package com.doding.aoptest.beans.joinpoint;
 
 import java.math.BigInteger;
 import java.util.HashMap;

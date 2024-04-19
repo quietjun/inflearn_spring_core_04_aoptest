@@ -40,7 +40,7 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- @@TODOBLOCK: 1. AOP를 위한 의존성을 추가해보세요.-->
+		<!-- @@TODOBLOCK: 02. AOP를 위한 의존성을 추가해보세요.-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>
