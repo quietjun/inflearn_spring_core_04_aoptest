@@ -1,4 +1,4 @@
-package com.doding.aoptest.joinpoint;
+package com.doding.aoptest.advicetype;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -21,51 +21,54 @@ import lombok.extern.slf4j.Slf4j;
 @SpringBootTest
 @Slf4j
 @ActiveProfiles("test")
-public class JoinPointBeanTest {
+public class AdviceTypeBeanTest {
   @Autowired
-  JoinPointBean jBean;
-  @Autowired
-  JoinPointExerciseBean eBean;
+  AdviceTypeBean aBean;
 
   @Test
   @DisplayName("@Before 테스트: 첫 번째 인자는 EJB였지만 spring으로 변경됨")
   public void beforeTest1() {
+    // @@TODOBLOCK: 05-2. setData에 대한 before advice를 테스트 하세요.
     // 처음 값은 "org name"과 ["EJB"]을 넘겨준다.
     String name = "org name";
-    jBean.setData(name, Arrays.asList("EJB", "JSP"));
+    aBean.setData(name, Arrays.asList("EJB", "JSP"));
     // 실제로 세팅된 값은?
-    log.debug("jBean: {}", jBean.toString()); // jBean: name: org name, year: 2000
-    assertEquals(jBean.getName(), name);
-    assertEquals(jBean.getSkills().get(0), "spring");
+    log.debug("jBean: {}", aBean.toString()); // jBean: name: org name, year: 2000
+    assertEquals(aBean.getName(), name);
+    assertEquals(aBean.getSkills().get(0), "spring");
+    // @@END:
   }
 
   @Test
   @DisplayName("getGugu 메서드 파라미터 범위 검증 확인, 1~9까지는 정상, 아니면 RuntimeException 발생")
   public void beforeTest2() {
-    // @@TODOBLOCK: JoinPointExerciseBean의 getGugu의 호출 파라미터 범위에 대한 동작을 테스트 하시오.
+    // @@TODOBLOCK: 06-2. getGugu의 호출 파라미터 범위에 대한 동작을 테스트 하시오.
     RuntimeException e = assertThrows(RuntimeException.class, () -> {
-      eBean.getGugu(-1, 10);
+      aBean.getGugu(-1, 10);
     });
     assertEquals(e.getMessage(), "구구단은 1~9까지의 수를 곱한다.");
-    assertEquals(eBean.getGugu(2, 3), 6);
+    assertEquals(aBean.getGugu(2, 3), 6);
     // @@END:
   }
 
   @Test
-  @DisplayName("리스트의 1번째 요소로 JSP를 담았고 리턴 되었지만 springboot로 변경됨")
+  @DisplayName("리스트의 1번째 요소로 JSP를 담았고 리턴 되었지만 springboot로 변경됨, name은 변경되지 않음")
   public void afterReturningTest() {
+    // @@TODOBLOCK: 07-2. getXX를 호출해보고 반환된 값이 조작되었는지 확인하세요.
     String name = "org name";
     List<String> skills = Arrays.asList("EJB", "JSP");
-    jBean.setData(name, skills);
-    assertEquals(jBean.getName(), name);
-    assertEquals(jBean.getSkills().get(1), "springboot");
+    aBean.setData(name, skills);
+    assertEquals(aBean.getName(), name);
+    assertEquals(aBean.getSkills().get(1), "springboot");
+    assertEquals(aBean.toString(), "name: org name, skils: [spring, springboot]");
+    // @@END:
   }
 
   @Test
   @DisplayName("getGugu 호출 결과에 대한 로깅 테스트")
   public void getGuguResultTest() {
     // @@TODOBLOCK: JoinPointExerciseBean의 getGugu 호출 시 로그가 잘 출력되는지 테스트 하시오.
-    int result = eBean.getGugu(8, 9);
+    int result = aBean.getGugu(8, 9);
     assertEquals(result, 8 * 9);
     // @@END:
   }
@@ -73,8 +76,8 @@ public class JoinPointBeanTest {
   @Test
   @DisplayName("0으로 나누면 RuntimeException 발생")
   public void afterThrowingTest() {
-    jBean.divideBy(10);
-    assertThrows(RuntimeException.class, () -> jBean.divideBy(0));
+    aBean.divideBy(10);
+    assertThrows(RuntimeException.class, () -> aBean.divideBy(0));
   }
 
   @Test
@@ -83,7 +86,7 @@ public class JoinPointBeanTest {
     int a = 10;
     int b = 3;
     int temp = a * 10 + b;
-    int result = jBean.add(a, b);
+    int result = aBean.add(a, b);
 
     assertEquals(result, temp % 2 == 0 ? temp : temp / 2);
   }
@@ -91,8 +94,8 @@ public class JoinPointBeanTest {
   @Test
   @DisplayName("cache를 이용한 factorial 확인")
   public void aroundTest() {
-    BigInteger bi1 = eBean.getFactorial(10);
-    BigInteger bi2 = eBean.getFactorial(10);
+    BigInteger bi1 = aBean.getFactorial(10);
+    BigInteger bi2 = aBean.getFactorial(10);
     assertEquals(bi1, bi2);
   }
 }

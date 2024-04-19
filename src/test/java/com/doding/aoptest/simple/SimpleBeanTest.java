@@ -43,4 +43,5 @@ public class SimpleBeanTest {
     log.debug("sbean type: {}", sbean.getClass().getName());
   }
   // @@END:
+
 }
