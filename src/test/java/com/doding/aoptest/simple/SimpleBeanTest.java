@@ -1,22 +1,18 @@
 package com.doding.aoptest.simple;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.util.Calendar;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-
 import com.doding.aoptest.beans.simple.SimpleBean;
-
 import lombok.extern.slf4j.Slf4j;
 
 @SpringBootTest
 @Slf4j
-@ActiveProfiles({ "test" })
+@ActiveProfiles({"test"})
 public class SimpleBeanTest {
   @Autowired
   SimpleBean sbean;
