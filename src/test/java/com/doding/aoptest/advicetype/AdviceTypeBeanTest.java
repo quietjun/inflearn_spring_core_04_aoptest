@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import com.doding.aoptest.beans.advicetype.AdviceTypeBean;
 import lombok.extern.slf4j.Slf4j;
 
 @SpringBootTest
@@ -58,38 +59,46 @@ public class AdviceTypeBeanTest {
     // @@END:
   }
 
+
+  @Test
+  @DisplayName("0으로 나누면 RuntimeException 발생")
+  public void afterThrowingTest() {
+    // @@TODOBLOCK: 08-2. divideBy를 호출해보고 던져진 예외가 AOP에 의해 모니터링 되는지 확인하세요.
+    aBean.divideBy(10);
+    assertThrows(RuntimeException.class, () -> aBean.divideBy(0));
+    // @@END:
+  }
+
+
   @Test
   @DisplayName("getGugu 호출 결과에 대한 로깅 테스트")
   public void getGuguResultTest() {
-    // @@TODOBLOCK: JoinPointExerciseBean의 getGugu 호출 시 로그가 잘 출력되는지 테스트 하시오.
+    // @@TODOBLOCK: 09-2. JoinPointExerciseBean의 getGugu 호출 시 로그가 잘 출력되는지 테스트 하시오.
     int result = aBean.getGugu(8, 9);
     assertEquals(result, 8 * 9);
     // @@END:
   }
 
   @Test
-  @DisplayName("0으로 나누면 RuntimeException 발생")
-  public void afterThrowingTest() {
-    aBean.divideBy(10);
-    assertThrows(RuntimeException.class, () -> aBean.divideBy(0));
-  }
-
-  @Test
   @DisplayName("전달한 값의 파라미터 및 결과 자체의 조작 가능")
   public void aroundAddTest() {
+    // @@TODOBLOCK: 10-2. add의 결과가 잘 조작되는지 확인하시오.
     int a = 10;
     int b = 3;
     int temp = a * 10 + b;
     int result = aBean.add(a, b);
 
     assertEquals(result, temp % 2 == 0 ? temp : temp / 2);
+    // @@END:
   }
 
   @Test
   @DisplayName("cache를 이용한 factorial 확인")
   public void aroundTest() {
+    // @@TODOBLOCK 11-2. factorial에서 cache 활용이 잘 되는지 테스트 하시오.
     BigInteger bi1 = aBean.getFactorial(10);
     BigInteger bi2 = aBean.getFactorial(10);
     assertEquals(bi1, bi2);
+    // @@END:
   }
 }

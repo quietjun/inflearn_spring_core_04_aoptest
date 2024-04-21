@@ -46,7 +46,7 @@
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 		<!--@@END:-->
-		<!-- @@TODOBLOCK: 1. static method에 대한 단위테스트를 위해 mockito-inline 의존성을 추가하세요. -->
+		<!-- @@TODOBLOCK: 20. static method에 대한 단위테스트를 위해 mockito-inline 의존성을 추가하세요. -->
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-inline</artifactId>

@@ -1,4 +1,4 @@
-package com.doding.aoptest.advicetype;
+package com.doding.aoptest.beans.advicetype;
 
 import java.math.BigInteger;
 import java.util.HashMap;
@@ -40,6 +40,7 @@ public class AdviceTypeBean {
      * if (a < 1 || a > 9 || b < 1 || b > 9) { throw new RuntimeException("구구단은 1~9까지의 수를 곱한다."); }
      */
     int result = a * b;
+    // System.out.printf("a: %d, b: %d, result : %d\n", a, b, result);
     return result;
   }
 

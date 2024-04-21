@@ -57,15 +57,23 @@ public class AdviceTypeAspect {
     } else {
       @SuppressWarnings(value = "unchecked")
       List<String> skills = (List<String>) retvalue;
-      System.out.println("조작 전: " + retvalue);
+      log.debug("조작 전: {}", retvalue);
       skills.set(1, "springboot");
-      System.out.println("조작 후: " + retvalue);
+      log.debug("조작 후: {}", retvalue);
     }
   }
   // @@END:
 
+  // @@TODOBLOCK: 08-1. AdviceTypeBean의 divideBy 메서드 호출 시 던져지는 예외를 모니터링해보세요.
+  // @AfterThrowing에서 던져진 예외는 ex 변수로 처리해보자.
+  @AfterThrowing(value = "execution(* *..AdviceTypeBean.divideBy(int))", throwing = "ex")
+  public void afterThrowingAdvice(JoinPoint jp, RuntimeException ex) {
+    log.debug("@AfterThrowing signature: {}, ex: {}", jp.getSignature(), ex.getClass().getName());
+    log.debug("예외 내용: {}, 조치내용: {}", ex.getMessage(), "담당자 이메일로 내용 전송");
+  }
+  // @@END:
 
-  // @@TODOBLOCK: getGugu가 호출될 때 파라미터와 반환값을 출력하는 로그를 출력해보세요.
+  // @@TODOBLOCK: 09-1. getGugu가 호출될 때 파라미터와 반환값을 출력하는 로그를 출력해보세요.
   @AfterReturning(value = "execution(* *..AdviceTypeBean.getGugu(..))", returning = "result")
   public void printGuguResult(JoinPoint jp, Integer result) {
     String msg = """
@@ -79,13 +87,8 @@ public class AdviceTypeAspect {
   }
   // @@END:
 
-  @AfterThrowing(value = "execution(* *..AdviceTypeBean.divideBy(int))", throwing = "ex")
-  public void afterThrowingAdvice(JoinPoint jp, RuntimeException ex) {
-    log.debug("@AfterThrowing signature: {}, ex: {}", jp.getSignature(), ex.getClass().getName());
-    log.debug("예외 내용: {}", ex.getMessage());
-    log.debug("조치 내용: 담당자 이메일로 내용 전송");
-  }
 
+  // @@TODOBLOCK: 10-1. add가 호출될 때 전달되는 파라미터를 각각 10배로 하고 결과를 2로 조작하도록 around에서 처리해보세요.
   @Around("execution(int *..AdviceTypeBean.add(int, int))")
   public Integer modifyAdd(ProceedingJoinPoint pjp) throws Throwable {
     StopWatch watch = new StopWatch();
@@ -96,8 +99,9 @@ public class AdviceTypeAspect {
     log.debug("소요 시간: {}, 타겟 리턴: {}", watch.getTotalTimeMillis());
     return result % 2 == 0 ? result : result / 2; // 3. 결과 조작 가능
   }
+  // @@END:
 
-  // @@TODOBLOCK: 이미 구해놓은 factorial 값을 cache에서 관리하도록 처리해보세요.
+  // @@TODOBLOCK: 11-1. 이미 구해놓은 factorial 값을 cache에서 관리하도록 처리해보세요.
   private Map<Object, BigInteger> factorialCache = new HashMap<>();
 
   @Around("execution(java.math.BigInteger *..AdviceTypeBean.getFactorial(int))")
